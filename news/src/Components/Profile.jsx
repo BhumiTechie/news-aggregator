@@ -5,7 +5,11 @@ const Profile = () => {
   const { user } = useAuth();
 
   if (!user) {
-    return <div className="text-center mt-10">Please log in to view your profile.</div>;
+    return (
+      <div className="text-center mt-10">
+        Please log in to view your profile.
+      </div>
+    );
   }
 
   return (
@@ -13,7 +17,6 @@ const Profile = () => {
       <h1 className="text-2xl font-bold mb-4">Profile</h1>
       <p><strong>Name:</strong> {user.name}</p>
       <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Joined On:</strong> {user.createdAt}</p>
     </div>
   );
 };
