@@ -11,10 +11,13 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (userData) => {
-    // Simulate login
-    setUser({ ...userData });
+    if (!userData.email || !userData.password) {
+      throw new Error("Email and password are required for login.");
+    }
+    setUser({ ...userData }); // Assuming backend validation is skipped for now
   };
-
+  
+  
   const logout = () => {
     setUser(null);
   };

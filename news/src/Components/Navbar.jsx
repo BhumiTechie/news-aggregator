@@ -6,6 +6,11 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
   const handleProfileClick = () => {
     navigate("/profile");
   };
@@ -37,7 +42,13 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
               onClick={handleProfileClick}
               className="w-10 h-10 bg-blue-500 rounded-full text-white flex items-center justify-center hover:bg-blue-600"
             >
-              {user.name.charAt(0).toUpperCase()}
+              {user?.name ? user.name.charAt(0).toUpperCase() : user?.email?.charAt(0).toUpperCase() || "?"}
+            </button>
+            <button
+              onClick={handleLogout}
+              className="ml-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+            >
+              Logout
             </button>
           </div>
         ) : (
