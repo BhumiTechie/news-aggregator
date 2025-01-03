@@ -1,48 +1,56 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  const { login } = useAuth();
-  const navigate = useNavigate(); // Use navigate hook
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      console.error("Email or password is missing.");
-      return;
-    }
-
-    try {
-      await login({ email, password }); // Ensure email and password are passed
-      navigate("/"); // Redirect to home page after login is successful
-    } catch (error) {
-      console.error("Login failed:", error);
+    if (email && password) {
+      navigate("/"); // Navigate to homepage on login
+    } else {
+      alert("Please enter both email and password.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        id="email"
-        className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        className="w-full border px-3 py-2 rounded"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-600">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl shadow-2xl w-[90%] max-w-md text-center"
+      >
+        <h1 className="text-3xl font-bold text-white mb-4">
+          Welcome Back
+        </h1>
+        <p className="text-gray-300 text-sm mb-6">
+          Log in to access amazing features
+        </p>
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-3 mb-4 text-gray-900 rounded-xl focus:outline-none focus:ring focus:ring-purple-500"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-3 mb-6 text-gray-900 rounded-xl focus:outline-none focus:ring focus:ring-purple-500"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full py-3 text-white bg-gradient-to-r from-purple-500 to-indigo-500 rounded-xl shadow-lg transform hover:scale-105 transition duration-200"
+        >
+          Log In
+        </button>
+      </form>
+    </div>
   );
 };
 

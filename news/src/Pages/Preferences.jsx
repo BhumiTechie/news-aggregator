@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext"; // Correct import
+import { AppProvider } from "../context/AppContext";
 
 const Preferences = () => {
   const { darkMode, toggleDarkMode } = useContext(AppContext);

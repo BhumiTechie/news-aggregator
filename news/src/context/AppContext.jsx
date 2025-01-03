@@ -1,24 +1,17 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
-// Create context
 const AppContext = createContext();
 
-// Create provider component
 export const AppProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  // Toggle dark mode
-  const toggleDarkMode = () => setDarkMode((prevMode) => !prevMode);
+  const [bookmarks, setBookmarks] = useState([]);
 
   return (
-    <AppContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <AppContext.Provider value={{ bookmarks, setBookmarks }}>
       {children}
     </AppContext.Provider>
   );
 };
 
-// Custom hook to use context in any component
-export const useAppContext = () => useContext(AppContext);
-
-// Exporting the context to use it elsewhere if needed
-export { AppContext };
+export const useAppContext = () => {
+  return useContext(AppContext);
+};
